@@ -1,5 +1,5 @@
 {
-  "name": "vue-codemirror-js",
+  "name": "@mdbarr/codemirror",
   "version": "0.1.0",
   "description": "Vue CodeMirror Component for JavaScript / JSON editing with linting",
   "main": "index.vue",
