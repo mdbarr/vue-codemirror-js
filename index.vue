@@ -29,65 +29,65 @@
 </template>
 
 <script>
-import CodeMirror from 'codemirror/lib/codemirror'
-import 'codemirror/lib/codemirror.css'
+import CodeMirror from 'codemirror/lib/codemirror';
+import 'codemirror/lib/codemirror.css';
 
 // Addons
-import 'codemirror/addon/comment/comment'
-import 'codemirror/addon/comment/continuecomment'
+import 'codemirror/addon/comment/comment';
+import 'codemirror/addon/comment/continuecomment';
 
-import 'codemirror/addon/dialog/dialog.css'
-import 'codemirror/addon/dialog/dialog'
+import 'codemirror/addon/dialog/dialog.css';
+import 'codemirror/addon/dialog/dialog';
 
-import 'codemirror/addon/display/fullscreen.css'
-import 'codemirror/addon/display/fullscreen'
-import 'codemirror/addon/display/panel'
-import 'codemirror/addon/display/placeholder'
+import 'codemirror/addon/display/fullscreen.css';
+import 'codemirror/addon/display/fullscreen';
+import 'codemirror/addon/display/panel';
+import 'codemirror/addon/display/placeholder';
 
-import 'codemirror/addon/edit/closebrackets'
-import 'codemirror/addon/edit/matchbrackets'
-import 'codemirror/addon/edit/trailingspace'
+import 'codemirror/addon/edit/closebrackets';
+import 'codemirror/addon/edit/matchbrackets';
+import 'codemirror/addon/edit/trailingspace';
 
-import 'codemirror/addon/fold/brace-fold'
-import 'codemirror/addon/fold/comment-fold'
-import 'codemirror/addon/fold/foldcode'
-import 'codemirror/addon/fold/foldgutter.css'
-import 'codemirror/addon/fold/foldgutter'
+import 'codemirror/addon/fold/brace-fold';
+import 'codemirror/addon/fold/comment-fold';
+import 'codemirror/addon/fold/foldcode';
+import 'codemirror/addon/fold/foldgutter.css';
+import 'codemirror/addon/fold/foldgutter';
 
-import 'codemirror/addon/hint/javascript-hint'
-import 'codemirror/addon/hint/show-hint.css'
-import 'codemirror/addon/hint/show-hint'
+import 'codemirror/addon/hint/javascript-hint';
+import 'codemirror/addon/hint/show-hint.css';
+import 'codemirror/addon/hint/show-hint';
 
-import 'codemirror/addon/lint/lint.css'
-import 'codemirror/addon/lint/lint'
+import 'codemirror/addon/lint/lint.css';
+import 'codemirror/addon/lint/lint';
 
-import 'codemirror/addon/merge/merge.css'
-import 'codemirror/addon/merge/merge'
+import 'codemirror/addon/merge/merge.css';
+import 'codemirror/addon/merge/merge';
 
-import 'codemirror/addon/scroll/simplescrollbars.css'
-import 'codemirror/addon/scroll/simplescrollbars'
+import 'codemirror/addon/scroll/simplescrollbars.css';
+import 'codemirror/addon/scroll/simplescrollbars';
 
-import 'codemirror/addon/search/jump-to-line'
-import 'codemirror/addon/search/match-highlighter'
-import 'codemirror/addon/search/matchesonscrollbar.css'
-import 'codemirror/addon/search/matchesonscrollbar'
-import 'codemirror/addon/search/search'
-import 'codemirror/addon/search/searchcursor'
+import 'codemirror/addon/search/jump-to-line';
+import 'codemirror/addon/search/match-highlighter';
+import 'codemirror/addon/search/matchesonscrollbar.css';
+import 'codemirror/addon/search/matchesonscrollbar';
+import 'codemirror/addon/search/search';
+import 'codemirror/addon/search/searchcursor';
 
-import 'codemirror/addon/selection/active-line'
-import 'codemirror/addon/selection/mark-selection'
+import 'codemirror/addon/selection/active-line';
+import 'codemirror/addon/selection/mark-selection';
 
 // Keymap
-import 'codemirror/keymap/emacs'
+import 'codemirror/keymap/emacs';
 
 // Mode
-import 'codemirror/mode/javascript/javascript'
+import 'codemirror/mode/javascript/javascript';
 
 // Theme
-import 'codemirror/theme/lesser-dark.css'
+import 'codemirror/theme/lesser-dark.css';
 
 // Eslint
-import './eslint'
+import './eslint';
 
 const eslintConfig = {
   'parser': 'espree',
@@ -201,67 +201,67 @@ const eslintConfig = {
     'prefer-promise-reject-errors': 'error',
     'yoda': 'error'
   }
-}
+};
 
-function getPosition (error, from) {
-  let line = error.line - 1
-  let ch = from ? error.column - 1 : error.column
+function getPosition(error, from) {
+  let line = error.line - 1;
+  let ch = from ? error.column - 1 : error.column;
 
   if (error.node && error.node.loc) {
-    line = from ? error.node.loc.start.line - 1 : error.node.loc.end.line - 1
-    ch = from ? error.node.loc.start.column : error.node.loc.end.column
+    line = from ? error.node.loc.start.line - 1 : error.node.loc.end.line - 1;
+    ch = from ? error.node.loc.start.column : error.node.loc.end.column;
   }
 
-  return CodeMirror.Pos(line, ch)
+  return CodeMirror.Pos(line, ch);
 }
 
-function getSeverity (error) {
+function getSeverity(error) {
   switch (error.severity) {
     case 1:
-      return 'warning'
+      return 'warning';
     case 2:
-      return 'error'
+      return 'error';
     default:
-      return 'error'
+      return 'error';
   }
 }
 
-let linter
-function validator (text, options, instance) {
+let linter;
+function validator(text, options, instance) {
   if (text && window.eslint) {
     if (!linter) {
       // eslint-disable-next-line
       linter = new window.eslint()
     }
 
-    const errors = linter.verify(text, eslintConfig)
+    const errors = linter.verify(text, eslintConfig);
 
-    const results = []
+    const results = [];
 
-    let fixable = false
+    let fixable = false;
 
     for (const error of errors) {
       if (error.fix) {
-        fixable = true
+        fixable = true;
       }
       results.push({
         message: error.message,
         severity: getSeverity(error),
         from: getPosition(error, true),
         to: getPosition(error, false)
-      })
+      });
     }
 
     if (instance.vue) {
-      instance.vue.linted = results.length === 0
-      instance.vue.fixable = fixable
+      instance.vue.linted = results.length === 0;
+      instance.vue.fixable = fixable;
     }
 
-    return results
+    return results;
   }
 }
 
-CodeMirror.registerHelper('lint', 'javascript', validator)
+CodeMirror.registerHelper('lint', 'javascript', validator);
 
 // Component
 export default {
@@ -275,24 +275,24 @@ export default {
     value: String
   },
   computed: {
-    fullscreenIcon () {
-      let icon = 'skyhook-clickable mdi mdi-fullscreen'
+    fullscreenIcon() {
+      let icon = 'skyhook-clickable mdi mdi-fullscreen';
       if (this.fullscreen) {
-        icon += '-exit'
+        icon += '-exit';
       }
-      return icon
+      return icon;
     },
-    lintedIcon () {
+    lintedIcon() {
       if (this.linted === true) {
-        return 'mdi mdi-checkbox-multiple-marked-circle'
+        return 'mdi mdi-checkbox-multiple-marked-circle';
       } else if (this.linted === false) {
-        return 'mdi mdi-checkbox-multiple-blank-circle'
+        return 'mdi mdi-checkbox-multiple-blank-circle';
       } else {
-        return 'mdi mdi-checkbox-multiple-blank-circle-outline'
+        return 'mdi mdi-checkbox-multiple-blank-circle-outline';
       }
     }
   },
-  data () {
+  data() {
     return {
       clean: true,
       content: '',
@@ -301,26 +301,26 @@ export default {
       instance: null,
       linted: null,
       panel: null
-    }
+    };
   },
   methods: {
-    fix () {
-      const cursor = this.instance.getCursor()
-      let content = this.instance.getValue()
-      const result = linter.verifyAndFix(content, eslintConfig)
-      this.instance.setValue(result.output)
-      this.instance.setCursor(cursor)
-      this.instance.focus()
+    fix() {
+      const cursor = this.instance.getCursor();
+      let content = this.instance.getValue();
+      const result = linter.verifyAndFix(content, eslintConfig);
+      this.instance.setValue(result.output);
+      this.instance.setCursor(cursor);
+      this.instance.focus();
     },
-    toggleFullscreen () {
-      this.fullscreen = !this.instance.getOption('fullScreen')
-      this.instance.setOption('fullScreen', this.fullscreen)
-      this.panel.classList.toggle('vue-codemirror-js-panel-fullscreen')
-      this.instance.focus()
+    toggleFullscreen() {
+      this.fullscreen = !this.instance.getOption('fullScreen');
+      this.instance.setOption('fullScreen', this.fullscreen);
+      this.panel.classList.toggle('vue-codemirror-js-panel-fullscreen');
+      this.instance.focus();
     }
   },
-  mounted () {
-    const vm = this
+  mounted() {
+    const vm = this;
     const events = [
       'beforeChange',
       'beforeSelectionChange',
@@ -338,7 +338,7 @@ export default {
       'scrollCursorIntoView',
       'update',
       'viewportChange'
-    ]
+    ];
 
     this.instance = CodeMirror.fromTextArea(this.$refs.textarea, {
       autoCloseBrackets: true,
@@ -363,31 +363,31 @@ export default {
       styleActiveLine: true,
       tabSize: 2,
       theme: 'lesser-dark'
-    })
+    });
 
-    this.instance.vue = this
+    this.instance.vue = this;
 
-    this.instance.setValue(this.code || this.value || this.content)
+    this.instance.setValue(this.code || this.value || this.content);
 
     this.instance.on('change', () => {
-      this.content = this.instance.getValue()
-      this.$emit('input', this.content)
-    })
+      this.content = this.instance.getValue();
+      this.$emit('input', this.content);
+    });
 
     for (const event of events) {
-      vm.instance.on(event, function (...args) {
-        const eventName = event.replace(/([A-Z])/g, '-$1').toLowerCase()
-        vm.$emit(eventName, ...args)
-      })
+      vm.instance.on(event, function(...args) {
+        const eventName = event.replace(/([A-Z])/g, '-$1').toLowerCase();
+        vm.$emit(eventName, ...args);
+      });
     }
 
-    this.panel = document.getElementById('vue-codemirror-js-panel')
+    this.panel = document.getElementById('vue-codemirror-js-panel');
     this.instance.addPanel(this.panel, {
       position: 'bottom',
       stable: true
-    })
+    });
   }
-}
+};
 </script>
 
 <style>
