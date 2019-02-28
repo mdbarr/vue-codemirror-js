@@ -9,7 +9,9 @@
   "private": false,
   "dependencies": {
     "@mdi/font": "^3.5.95",
-    "codemirror": "^5.44.0"
+    "codemirror": "^5.44.0",
+    "postcss-load-config": "^2.0.0",
+    "postcss-loader": "^3.0.0"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",

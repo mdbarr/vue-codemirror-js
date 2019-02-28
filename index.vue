@@ -15,7 +15,7 @@
     <div id="vue-codemirror-js-panel" class="vue-codemirror-js-panel">
       <div class="vue-codemirror-js-panel-left">
         <i :class="lintedIcon"></i>
-        <i class="mdi mdi-auto-fix vue-codemirror-js-clickable" v-if="fixable" @click.stop="fix"></i>
+        <i class="mdi mdi-auto-fix vue-codemirror-js-clickable vue-codemirror-js-spacer-left" v-if="fixable" @click.stop="fix"></i>
       </div>
       <div class="vue-codemirror-js-panel-center">
         <i class="mdi mdi-drag-horizontal vue-codemirror-js-clickable" @click.stop="fix"></i>
@@ -82,6 +82,9 @@ import 'codemirror/keymap/emacs';
 
 // Mode
 import 'codemirror/mode/javascript/javascript';
+
+// Icons
+import '@mdi/font/css/materialdesignicons.css'
 
 // Theme
 import 'codemirror/theme/lesser-dark.css';
@@ -276,7 +279,7 @@ export default {
   },
   computed: {
     fullscreenIcon() {
-      let icon = 'skyhook-clickable mdi mdi-fullscreen';
+      let icon = 'vue-codemirror-js-clickable mdi mdi-fullscreen';
       if (this.fullscreen) {
         icon += '-exit';
       }
@@ -284,11 +287,11 @@ export default {
     },
     lintedIcon() {
       if (this.linted === true) {
-        return 'mdi mdi-checkbox-multiple-marked-circle';
+        return 'mdi mdi-check-circle-outline';
       } else if (this.linted === false) {
-        return 'mdi mdi-checkbox-multiple-blank-circle';
+        return 'mdi mdi-alert-circle-outline';
       } else {
-        return 'mdi mdi-checkbox-multiple-blank-circle-outline';
+        return 'mdi mdi-dots-horizontal-circle-outline';
       }
     }
   },
@@ -458,6 +461,9 @@ export default {
     width: 34%;
     text-align: right;
     padding-right: 4px;
+}
+.vue-codemirror-js-spacer-left {
+    padding-left: 8px;
 }
 
 .CodeMirror {
