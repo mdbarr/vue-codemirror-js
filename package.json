@@ -1,0 +1,17 @@
+{
+  "name": "vue-codemirror-js",
+  "version": "0.1.0",
+  "description": "Vue CodeMirror Component for JavaScript / JSON editing with linting",
+  "main": "index.vue",
+  "repository": "git@github.com:mdbarr/vue-codemirror-js.git",
+  "author": "Mark Barr <mark@hyperingenuity.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@mdi/font": "^3.5.95",
+    "codemirror": "^5.44.0"
+  },
+  "scripts": {
+    "eslint:fetch": "curl https://eslint.org/js/app/eslint.js > ./eslint.js"
+  }
+}
