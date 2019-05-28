@@ -8,15 +8,15 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@mdi/font": "^3.5.95",
-    "codemirror": "^5.44.0",
+    "@mdi/font": "^3.6.95",
+    "codemirror": "^5.47.0",
     "postcss-load-config": "^2.0.0",
     "postcss-loader": "^3.0.0"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.14.1",
+    "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2"
   },
   "scripts": {
